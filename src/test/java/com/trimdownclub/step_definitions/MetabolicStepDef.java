@@ -1,49 +1,53 @@
 package com.trimdownclub.step_definitions;
 
-import com.trimdownclub.pages.FunnelPage;
+import com.trimdownclub.pages.MetabolicFunnelPage;
 import com.trimdownclub.pages.MeasurementsPage;
 import com.trimdownclub.utilities.BrowserUtils;
 import com.trimdownclub.utilities.Driver;
 import io.cucumber.java.en.Given;
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 
 public class MetabolicStepDef {
 
-	private FunnelPage funnelPage = new FunnelPage();
+	private MetabolicFunnelPage metabolicFunnelPage = new MetabolicFunnelPage();
 	private MeasurementsPage measurementsPage = new MeasurementsPage();
+
 
 	@Given("The user is on the {string} page")
 	public void the_user_is_on_the_page(String funnelName) {
-		funnelPage.gotoFunnelURL(funnelName);
+		metabolicFunnelPage.goToURL(funnelName);
 	}
 
 	@Given("The user goes through the whole metabolic funnel")
 	public void the_user_goes_through_the_whole_metabolic_funnel() {
-		funnelPage.clickAcceptCookies();
-		funnelPage.chooseOptionFromFunnel();
-		funnelPage.chooseOptionFromFunnel();
-		funnelPage.chooseOptionFromFunnel();
-		funnelPage.chooseOptionFromFunnel();
-		funnelPage.chooseOptionFromFunnel();
-		funnelPage.clickNext();
-		funnelPage.chooseOptionFromFunnel();
-		funnelPage.chooseOptionFromFunnel();
-		funnelPage.chooseOptionFromFunnel();
-		funnelPage.chooseOptionFromFunnel();
-		funnelPage.clickNext();
+		//funnelPage.clickAcceptCookies();
+		metabolicFunnelPage.chooseOptionFromFunnel();
+		metabolicFunnelPage.chooseOptionFromFunnel();
+		metabolicFunnelPage.chooseOptionFromFunnel();
+		metabolicFunnelPage.chooseOptionFromFunnel();
+		metabolicFunnelPage.chooseOptionFromFunnel();
+		metabolicFunnelPage.clickNext();
+		metabolicFunnelPage.chooseOptionFromFunnel();
+		metabolicFunnelPage.chooseOptionFromFunnel();
+		metabolicFunnelPage.chooseOptionFromFunnel();
+		metabolicFunnelPage.chooseOptionFromFunnel();
+		metabolicFunnelPage.clickNext();
 		measurementsPage.setAllFields();
-		funnelPage.endFunnel();
+		metabolicFunnelPage.endFunnel();
 	}
+
+
+
+
 
 	@Given("TestMeasurements")
 	public void TestMeasurements1(){
 		Driver.get().get("https://dynamicsurvey.trimdownclub.com/mt/v173/11/");
 		BrowserUtils.wait(1);
 		measurementsPage.setAllFields();
-		funnelPage.endFunnel();
+		metabolicFunnelPage.endFunnel();
 
 	}
 

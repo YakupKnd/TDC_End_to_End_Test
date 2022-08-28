@@ -3,14 +3,9 @@ package com.trimdownclub.pages;
 import com.trimdownclub.utilities.BrowserUtils;
 import com.trimdownclub.utilities.ConfigurationReader;
 import com.trimdownclub.utilities.Driver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class BasePage {
-
-	@FindBy(css = "div#onetrust-banner-sdk button#onetrust-accept-btn-handler")
-	private WebElement acceptcookies;
+public abstract class BasePage {
 
 	private static int testCount = 1;
 	private String url;
@@ -19,11 +14,11 @@ public class BasePage {
 		PageFactory.initElements(Driver.get(), this);
 	}
 
-	public void gotoFunnelURL(String funnelName) {
+	public void goToURL(String funnelName) {
 		setURL(funnelName);
 		setURLParameters(funnelName);
 		Driver.get().get(url);
-		waitForURLContains("https://dynamicsurvey.trimdownclub.com/");
+		BrowserUtils.waitForURLContains("https://dynamicsurvey.trimdownclub.com/", 5);
 	}
 
 	public void setURL(String funnelName){
@@ -49,21 +44,6 @@ public class BasePage {
 				+ "&ADID=" + funnelName + "_" + currentDate + "_test" + testCount++;
 	}
 
-	public void waitForURLContains(String partialURL){
-		BrowserUtils.waitForURLContains(partialURL, 5);
-	}
 
-	public String getCurrentURL() {
-		return Driver.get().getCurrentUrl();
-	}
-
-	public void clickAcceptCookies(){
-		try {
-			BrowserUtils.waitForVisibility(acceptcookies,2);
-			acceptcookies.click();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 
 }

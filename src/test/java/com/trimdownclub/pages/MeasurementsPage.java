@@ -1,12 +1,10 @@
 package com.trimdownclub.pages;
 
 import com.trimdownclub.utilities.BrowserUtils;
-import com.trimdownclub.utilities.Driver;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class MeasurementsPage extends FunnelPage {
+public class MeasurementsPage extends BasePage {
 
 	//fields
 	private int age;
@@ -52,7 +50,7 @@ public class MeasurementsPage extends FunnelPage {
 	public void setAge(){
 		//generate random number between 20-40
 		this.age = BrowserUtils.generateRandomNumber(20) + 20;
-		System.out.println("age is: " + age);
+		System.out.println("age : " + age);
 		BrowserUtils.sendKeysWithWait(ageField, this.age, 3);
 		BrowserUtils.wait(0.5);
 	}
@@ -61,6 +59,7 @@ public class MeasurementsPage extends FunnelPage {
 	public void setHeightFt(){
 		//generate random number between 5-7
 		this.heightFt = BrowserUtils.generateRandomNumber(2) + 5;
+		System.out.println("height feet : " + heightFt);
 		BrowserUtils.sendKeysWithWait(heightFtField, this.heightFt, 3);
 		BrowserUtils.wait(0.5);
 	}
@@ -68,6 +67,7 @@ public class MeasurementsPage extends FunnelPage {
 	public void setHeightInch(){
 		//generate random number between 5-7
 		this.heightInch = BrowserUtils.generateRandomNumber(2) + 5;
+		System.out.println("height inch : " + heightInch);
 		BrowserUtils.sendKeysWithWait(heightInchField, this.heightInch, 3);
 		BrowserUtils.wait(0.5);
 	}
@@ -75,6 +75,7 @@ public class MeasurementsPage extends FunnelPage {
 	public void setWeight(){
 		//generate random number between 300-500
 		this.weight = BrowserUtils.generateRandomNumber(200) + 300;
+		System.out.println("weight : " + weight);
 		BrowserUtils.sendKeysWithWait(weightField, this.weight, 3);
 		BrowserUtils.wait(0.5);
 	}
@@ -82,6 +83,7 @@ public class MeasurementsPage extends FunnelPage {
 	public void setTargetWeight(){
 		//weight - 50
 		this.targetWeight = weight - 50;
+		System.out.println("target weight : " + targetWeight);
 		BrowserUtils.sendKeysWithWait(targetWeightField, this.targetWeight, 3);
 		BrowserUtils.wait(0.5);
 	}
