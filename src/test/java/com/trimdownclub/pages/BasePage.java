@@ -5,12 +5,23 @@ import com.trimdownclub.utilities.ConfigurationReader;
 import com.trimdownclub.utilities.Driver;
 import org.openqa.selenium.support.PageFactory;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class BasePage {
 
 	private static int testCount = 1;
-	private String url;
+	private static String url;
+	protected static String currentDate;
+	protected static String email;
+	protected static BigDecimal expectedTotalPrice = new BigDecimal(0);
+	protected static List<String> actualProducts = new ArrayList<>();
+
+
 
 	public BasePage() {
+		currentDate = BrowserUtils.getCurrentDateAndTime();
 		PageFactory.initElements(Driver.get(), this);
 	}
 
@@ -18,7 +29,7 @@ public abstract class BasePage {
 		setURL(funnelName);
 		setURLParameters(funnelName);
 		Driver.get().get(url);
-		BrowserUtils.waitForURLContains("https://dynamicsurvey.trimdownclub.com/", 5);
+		waitForURL("https://dynamicsurvey.trimdownclub.com/");
 	}
 
 	public void setURL(String funnelName){
@@ -38,12 +49,21 @@ public abstract class BasePage {
 	}
 
 	public void setURLParameters(String funnelName) {
-		String currentDate = BrowserUtils.getCurrentDateAndTime();
-
 		url += "?tid=" + funnelName + "_" + currentDate + "_test" + testCount
 				+ "&ADID=" + funnelName + "_" + currentDate + "_test" + testCount++;
 	}
 
 
+	public void waitForURL(String urlPart){
+		BrowserUtils.waitForURLContains(urlPart,5);
+	}
+
+	public BigDecimal getExpectedTotalPrice(){
+		return expectedTotalPrice;
+	}
+
+	public List<String> getActualProducts(){
+		return actualProducts;
+	}
 
 }

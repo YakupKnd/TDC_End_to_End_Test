@@ -11,10 +11,7 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 
 public class BrowserUtils {
 
@@ -33,7 +30,7 @@ public class BrowserUtils {
         long longValue2 = date.getTime();
 
         LocalDateTime dateTime = LocalDateTime.ofInstant(Instant.ofEpochMilli(longValue2), ZoneId.systemDefault());
-        String formattedString = dateTime.format(DateTimeFormatter.ofPattern("ddMMyyyy_HHmm"));
+        String formattedString = dateTime.format(DateTimeFormatter.ofPattern("ddMMyyyyHHmm"));
 
         return formattedString;
     }
@@ -110,6 +107,17 @@ public class BrowserUtils {
         }
     }
 
+    //get text as a list from a list of web elements
+    public static List<String> getTextAsList(List<WebElement> elementList){
+        List<String> newList = new ArrayList<>();
+
+        for (int i = 0; i < elementList.size(); i++) {
+            newList.add(elementList.get(i).getText());
+        }
+
+        return newList;
+    }
+
     //wait for visibility of a web element
     public static void waitForVisibility(WebElement element, int timeOut) {
         try {
@@ -148,11 +156,28 @@ public class BrowserUtils {
         }
     }
 
+    //wait until a certain text get present in a web element
+    public void waitForTextContains(WebElement element,  String text){
+        WebDriverWait wait = new WebDriverWait(Driver.get(),5);
+        wait.until(ExpectedConditions.textToBePresentInElement(element, text));
+    }
+
     //wait till a new window gets opened
     public static void waitForNewWindow() {
         try {
             WebDriverWait wait = new WebDriverWait(Driver.get(), 4);
             wait.until(ExpectedConditions.numberOfWindowsToBe(2));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    //wait till a new window gets opened
+    public static void waitForAlert() {
+        try {
+            WebDriverWait wait = new WebDriverWait(Driver.get(), 4);
+            wait.until(ExpectedConditions.alertIsPresent());
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -1,5 +1,6 @@
-package com.trimdownclub.pages;
+package com.trimdownclub.pages.funnels;
 
+import com.trimdownclub.pages.BasePage;
 import com.trimdownclub.utilities.BrowserUtils;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
