@@ -1,11 +1,12 @@
 package com.trimdownclub.pages.upsells;
 
 import com.trimdownclub.pages.BasePage;
+import com.trimdownclub.pages.Purchases;
 import com.trimdownclub.utilities.BrowserUtils;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class UpsellPage3 extends Upsells {
+public class UpsellPage3 extends Purchases {
 
 	@FindBy(css = "span.boldNbig")
 	private WebElement productNameWE;
@@ -19,14 +20,14 @@ public class UpsellPage3 extends Upsells {
 
 
 	@Override
-	public void purchaseFromUpsell(){
+	public void purchase(){
 		BrowserUtils.waitForVisibility(upgradeMyOrderBtn,5);
 		BrowserUtils.scrollToElement(upgradeMyOrderBtn);
 		BrowserUtils.clickWithWait(upgradeMyOrderBtn,3);
 	}
 
 	@Override
-	public void setPrice(){
+	public void setIndividualPrice(){
 		BrowserUtils.waitForVisibility(priceUpsell3WE,3);
 		BrowserUtils.scrollToElement(priceUpsell3WE);
 		this.price = priceUpsell3WE.getText();
@@ -34,21 +35,20 @@ public class UpsellPage3 extends Upsells {
 	}
 
 	@Override
-	public String getPrice(){
+	public String getIndividualPrice(){
 		System.out.println("price on upsell 3 is: " + price);
 		return this.price;
 	}
 
 
 	@Override
-	public void setProductName() {
+	public void setIndividualProductName() {
 		BrowserUtils.waitForVisibility(productNameWE,2);
 		this.productName = productNameWE.getText();
-		System.out.println("product name on upsell 3 is: " + productName);
 	}
 
 	@Override
-	public String getProductName() {
+	public String getIndividualProductName() {
 		System.out.println("product name on upsell 3 is: " + productName);
 		return this.productName;
 	}

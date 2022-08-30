@@ -1,5 +1,6 @@
 package com.trimdownclub.pages.funnels;
 
+import com.trimdownclub.pages.funnels.helpers.Funnels;
 import com.trimdownclub.utilities.BrowserUtils;
 import com.trimdownclub.utilities.Driver;
 import org.openqa.selenium.By;
@@ -47,12 +48,17 @@ public class MetabolicFunnelPage extends Funnels {
 	}
 
 	@Override
-	public void setPrice() {
+	public void purchase() {
 
 	}
 
 	@Override
-	public String getPrice() {
+	public void setIndividualPrice() {
+
+	}
+
+	@Override
+	public String getIndividualPrice() {
 		return null;
 	}
 
@@ -60,7 +66,7 @@ public class MetabolicFunnelPage extends Funnels {
 		String priceFunnelAsDecimal = null;
 
 		try {
-			priceFunnelAsDecimal = priceFunnel.replace("$", "");
+			priceFunnelAsDecimal = price.replace("$", "");
 		} catch (Exception e) {
 		}
 
@@ -68,12 +74,12 @@ public class MetabolicFunnelPage extends Funnels {
 	}
 
 	@Override
-	public void setProductName() {
+	public void setIndividualProductName() {
 
 	}
 
 	@Override
-	public String getProductName() {
+	public String getIndividualProductName() {
 		return null;
 	}
 }

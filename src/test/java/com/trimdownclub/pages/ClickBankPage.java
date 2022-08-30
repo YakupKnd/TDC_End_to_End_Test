@@ -6,9 +6,7 @@ import com.trimdownclub.utilities.ConfigurationReader;
 import com.trimdownclub.utilities.Driver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class ClickBankPage extends BasePage {
 
@@ -129,7 +127,7 @@ public class ClickBankPage extends BasePage {
 		BrowserUtils.clickWithWait(acceptTermsCheckbox,2);
 	}
 
-	public void clickPayNowBtn(){
+	public void purchase(){
 		BrowserUtils.wait(0.3);
 
 		BrowserUtils.clickWithWait(acceptTermsCheckbox,2);
@@ -139,7 +137,6 @@ public class ClickBankPage extends BasePage {
 	public void setPrice(){
 		BrowserUtils.waitForText(priceClickBankWE,"$");
 		this.priceClickBank = priceClickBankWE.getText();
-		System.out.println("price on clickbank is: " + priceClickBank);
 	}
 
 	public String getPrice(){
@@ -154,6 +151,5 @@ public class ClickBankPage extends BasePage {
 	public String generateCardHolder(){
 		return "test " + currentDate + " test";
 	}
-
 
 }

@@ -1,14 +1,13 @@
 package com.trimdownclub.pages.funnels;
 
+import com.trimdownclub.pages.funnels.helpers.Funnels;
 import com.trimdownclub.utilities.BrowserUtils;
 import com.trimdownclub.utilities.Driver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.math.BigDecimal;
-
-public class DiabetesFunnelPage extends Funnels  {
+public class DiabetesFunnelPage extends Funnels {
 
 	@FindBy(css = "a.orange-flexible-btn.knd-ic-btn")
 	private WebElement ctaBtn;
@@ -55,45 +54,35 @@ public class DiabetesFunnelPage extends Funnels  {
 	}
 
 	@Override
-	public void setPrice() {
+	public void setIndividualPrice() {
 		BrowserUtils.waitForVisibility(priceFunnelWE,3);
-		this.priceFunnel = priceFunnelWE.getText();
-		System.out.println("price on funnel is: " + priceFunnel);
+		this.price = priceFunnelWE.getText();
+	}
+
+
+	@Override
+	public String getIndividualPrice(){
+		System.out.println("price on funnel is: " + price);
+		return this.price;
 	}
 
 	@Override
-	public String getPrice(){
-		System.out.println("price on funnel is: " + priceFunnel);
-		return this.priceFunnel;
-	}
-
-	public void calculateTotalPrice() {
-		String priceFunnelAsDecimal = null;
-
-		try {
-			priceFunnelAsDecimal = priceFunnel.replace("$", "");
-		} catch (Exception e) {
-		}
-
-		expectedTotalPrice = expectedTotalPrice.add(new BigDecimal(priceFunnelAsDecimal));
-	}
-
-	@Override
-	public void setProductName(){
+	public void setIndividualProductName(){
 		this.productName = "Trim Down Club Program";
 	}
 
 	@Override
-	public String getProductName(){
+	public String getIndividualProductName(){
 		return this.productName;
 	}
 
-	public void getMyCustomizeLowSugarPlan(){
-		BrowserUtils.clickWithWait(getMyCustomizedLowSugarPlanBtn,10);
+	@Override
+	public void purchase(){
+		BrowserUtils.clickWithWait(ctaBtn,3);
 	}
 
-	public void clickCTAButton(){
-		BrowserUtils.clickWithWait(ctaBtn,3);
+	public void getMyCustomizeLowSugarPlan(){
+		BrowserUtils.clickWithWait(getMyCustomizedLowSugarPlanBtn,20);
 	}
 
 }

@@ -1,4 +1,4 @@
-package com.trimdownclub.pages.funnels;
+package com.trimdownclub.pages.funnels.helpers;
 
 import com.trimdownclub.pages.BasePage;
 import com.trimdownclub.utilities.BrowserUtils;

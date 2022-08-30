@@ -11,11 +11,14 @@ import java.util.List;
 
 public class ThankYouPage extends BasePage {
 
+	private BigDecimal totalPrice;
+	private List<String> allProducts;
+
 	@FindBy(css = "input#acceptBtn")
 	private WebElement greenOkBtn;
 
 	@FindBy(css = "input[value='Access Digital Product']")
-	private List<WebElement> allAccessDigitalProductButtons	;
+	private List<WebElement> allAccessDigitalProductButtons;
 
 	@FindBy(css = "div.pricingInfo p[id^='productPrice']")
 	private List<WebElement> allProductPricesWE;
@@ -24,29 +27,33 @@ public class ThankYouPage extends BasePage {
 	private List<WebElement> allProductNamesWE;
 
 
-	public void clickGreenOkBtn(){
-		BrowserUtils.clickWithWait(greenOkBtn,2);
+	public void clickGreenOkBtn() {
+		BrowserUtils.clickWithWait(greenOkBtn, 2);
 	}
 
-	public List<String> getAllProductNames(){
-		return BrowserUtils.getTextAsList(allProductNamesWE);
+	public List<String> getAllProductNames() {
+		return this.allProducts;
 	}
 
-	public BigDecimal calculateTotalPrice(){
+	public void setAllProductNames(){
+		this.allProducts = BrowserUtils.getTextAsList(allProductNamesWE);
+	}
 
-		BigDecimal totalPrice = new BigDecimal("0");
+	public void setActualTotalPrice() {
+		totalPrice = new BigDecimal("0");
 
 		for (int i = 0; i < allProductPricesWE.size(); i++) {
-			totalPrice = totalPrice.add(new BigDecimal(allProductPricesWE.get(i).getText().replace("$","")));
+			totalPrice = totalPrice.add(new BigDecimal(allProductPricesWE.get(i).getText().replace("$", "")));
 		}
+	}
 
+	public BigDecimal getActualTotalPrice() {
+		setActualTotalPrice();
 		return totalPrice;
 	}
 
-	public void clickAllAccessProdBtns(){
-		for (int i = 0; i < allAccessDigitalProductButtons.size(); i++) {
-			allAccessDigitalProductButtons.get(i).click();
-		}
+	public void goToDigitalProducts() {
+		allAccessDigitalProductButtons.get(0).click();
 	}
 
 }

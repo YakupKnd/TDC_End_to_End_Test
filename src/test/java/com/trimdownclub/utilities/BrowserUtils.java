@@ -220,9 +220,28 @@ public class BrowserUtils {
 
     //attempt to click on a web element a couple of times
     public static void clickManyTimes(WebElement element) {
-        waitClickability(element, 3);
         for (int i = 0; i < 3; i++) {
             try {
+                waitClickability(element, 3);
+                element.click();
+            } catch (Exception e) {
+                e.printStackTrace();
+                try {
+                    Thread.sleep(1000);
+                } catch (Exception ee) {
+                    ee.printStackTrace();
+                }
+            }
+        }
+    }
+
+    //attempt to click on a web element a couple of times
+    public static void clickManyTimes(By by) {
+
+        for (int i = 0; i < 3; i++) {
+            try {
+                WebElement element = Driver.get().findElement(by);
+                waitClickability(element, 3);
                 element.click();
             } catch (Exception e) {
                 e.printStackTrace();
